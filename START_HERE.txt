@@ -1,0 +1,28 @@
+NEXUS CARE — CLEAN START
+
+1. Extract the ZIP to a local folder (for example C:\NEXUS-CARE). Avoid running directly from a compressed archive.
+2. If Windows Smart App Control blocks the .bat file, open PowerShell in this folder and run:
+   Get-ChildItem -Recurse -File | Unblock-File
+3. Double-click start_demo_8020.bat.
+4. Open http://127.0.0.1:8020 if it does not open automatically.
+
+PATIENT DEMO
+patient@demo.com / demo123
+
+CLINICIAN DEMO
+doctor@demo.com / demo123
+
+ADMIN DEMO
+admin@demo.com / demo123
+
+NEW PATIENT
+Click “Register as a new patient” on the login screen. Registration requires essential identity, body, medical-history and emergency details. The new patient is automatically signed in after registration.
+
+PROFILE EDITING
+Patients can use “My Profile” in the top navigation to edit identity, medical history, body profile and emergency information. Changes persist in the local database.
+
+GUARDIAN VISION
+Guardian Vision attempts to start automatically after patient login. Browser security still controls camera permission; a website cannot bypass Chrome/Edge camera permission controls. No separate NEXUS CARE permission form is shown.
+
+SAFETY
+Academic prototype only. AI outputs are educational triage recommendations and possible-condition predictions, not medical diagnoses. Human clinical review is required.

@@ -1,0 +1,33 @@
+NEXUS CARE v6 — LEVEL-UP BUILD
+
+1. Extract this ZIP into a new folder (not inside OneDrive if Windows Smart App Control is aggressive).
+2. Right-click the ZIP > Properties > if you see Unblock, tick it > Apply, BEFORE extracting.
+3. Open the extracted NEXUS-CARE folder.
+4. Double-click start_demo_8040.bat.
+5. Open http://127.0.0.1:8040 if it does not open automatically.
+
+DEMO ACCOUNTS
+Patient: patient@demo.com / demo123
+Clinician: doctor@demo.com / demo123
+Admin: admin@demo.com / demo123
+
+V6 SIGNATURE FEATURES
+- Multimodal-style risk fusion: symptom/NLP + profile context + vitals simulator + Guardian Vision signal
+- Dynamic clinical interview UX with natural-language intake
+- Explainable risk and ESI breakdown
+- Possible-condition ranking from XGBoost model trained on synthetic educational symptom profiles
+- Patient health timeline
+- Patient profile editing and essential onboarding
+- Guardian Vision prototype with local motion/inactivity detection
+- Voice symptom intake via browser SpeechRecognition when supported
+- Hospital command center and prioritized queue
+- Smart hospital network prototype
+- Clinical Simulation Lab with What-if inputs
+- FHIR record explorer
+- Privacy / human-in-the-loop center
+- Admin Model Lab and system intelligence dashboard
+- WebSocket live emergency alerts
+- Emergency location + ambulance dispatch simulation
+
+IMPORTANT SAFETY NOTE
+This is an academic prototype. It is not a medical device and does not diagnose disease. Model metrics are based on synthetic/generated educational data, not clinical validation. Emergency dispatch is simulated. Browser camera access is controlled by Chrome/Edge; a web page cannot legitimately bypass browser camera permission.

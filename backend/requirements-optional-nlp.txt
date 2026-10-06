@@ -1,0 +1,4 @@
+# Optional biomedical NLP packages from the capstone proposal.
+# They are kept separate because their language models are large/environment-specific.
+medspacy
+scispacy

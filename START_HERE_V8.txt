@@ -1,0 +1,13 @@
+NEXUS CARE v8 APEX
+
+1. Extract this folder.
+2. Run start_demo_8060.bat.
+3. Open http://127.0.0.1:8060
+
+Demo accounts:
+patient@demo.com / demo123
+doctor@demo.com / demo123
+admin@demo.com / demo123
+
+New in v8: multimodal signal radar, Health Graph, Live Deterioration Lab, scenario escalation, enhanced APEX UI, animated risk fusion, and smart routing API.
+Camera note: browser permission remains controlled by Chrome/Edge; the app cannot bypass it.

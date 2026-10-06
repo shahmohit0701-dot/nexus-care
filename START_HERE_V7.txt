@@ -1,0 +1,21 @@
+NEXUS CARE v7 — START HERE
+
+1. Extract the ZIP into a new folder.
+2. If Windows blocks the BAT file, use PowerShell:
+   Unblock-File -Path .\start_demo_8050.bat
+3. Double-click start_demo_8050.bat.
+4. Open http://127.0.0.1:8050
+
+Demo accounts
+Patient:   patient@demo.com / demo123
+Clinician: doctor@demo.com  / demo123
+Admin:     admin@demo.com   / demo123
+
+New in v7
+- Cinematic launch animation
+- Care Copilot clinician brief export
+- Health Twin readiness signal
+- Premium feature strip and motion polish
+- Existing v6 AI, ESI, Guardian Vision, FHIR, simulation, emergency and profile features retained
+
+Camera note: browser permission cannot be bypassed by a web app. If access has previously been granted, Guardian Vision can initialize automatically.

@@ -1,0 +1,22 @@
+disease,description,fever,cough,sore_throat,runny_nose,headache,body_ache,fatigue,nausea,vomiting,diarrhea,abdominal_pain,chest_pain,shortness_of_breath,wheezing,dizziness,rash,joint_pain,burning_urination,frequent_urination,back_pain,sweating,photophobia,neck_stiffness,nasal_congestion,facial_pain,heartburn,palpitations,anxiety,thirst,frequent_hunger,weight_loss,chills,muscle_pain,loss_of_appetite
+Common Cold,Viral upper respiratory illness; educational label only.,0,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+Influenza,Influenza-like illness; educational label only.,1,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+COVID-19,Respiratory viral illness profile; educational label only.,1,1,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pneumonia,Lower respiratory infection profile; educational label only.,1,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+Asthma Exacerbation,Airway symptom profile; educational label only.,0,1,0,0,0,0,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Bronchitis,Respiratory symptom profile; educational label only.,0,1,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sinusitis,Upper respiratory/sinus symptom profile; educational label only.,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+Migraine,Headache syndrome profile; educational label only.,0,0,0,0,1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+Gastroenteritis,GI symptom profile; educational label only.,1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+GERD,Reflux symptom profile; educational label only.,0,1,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+Appendicitis,Acute abdominal symptom profile; educational label only.,1,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+UTI,Urinary symptom profile; educational label only.,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kidney Stone,Renal colic symptom profile; educational label only.,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+Dengue-like Febrile Illness,Febrile syndrome profile; educational label only.,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Malaria-like Febrile Illness,Febrile syndrome profile; educational label only.,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0
+Hypertension-related Symptoms,Non-specific symptom profile; hypertension itself is often asymptomatic.,0,0,0,0,1,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+Diabetes-related Symptoms,Hyperglycemia symptom profile; educational label only.,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0
+Allergic Rhinitis,Allergic upper-airway symptom profile; educational label only.,0,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+Panic Attack,Acute anxiety symptom profile; educational label only.,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0
+Acute Cardiac Warning Pattern,Emergency-oriented symptom pattern for educational triage demonstration; not a diagnosis.,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0
+Otitis Media,Ear infection profile; educational label only.,1,0,1,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
