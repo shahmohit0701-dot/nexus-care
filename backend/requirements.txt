@@ -8,3 +8,5 @@ numpy==2.2.4
 scikit-learn==1.6.1
 xgboost==3.0.0
 joblib==1.4.2
+psycopg[binary]==3.2.10
+python-dotenv==1.1.1
