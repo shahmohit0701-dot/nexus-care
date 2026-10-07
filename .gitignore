@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .env
 node_modules/
+
+.venv_vercel_test/
+.venv_min_test/
