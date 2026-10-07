@@ -1,7 +1,20 @@
 const state={booting:true,bootProgress:0,bootStep:'Initializing clinical core…',authView:'login',user:null,profile:null,triage:null,messages:[],emergencies:[],triages:[],metrics:null,hospitals:[],timeline:[],vitals:{hr:78,spo2:98,temp:36.8,bp:'122/78',rr:16},camera:false,stream:null,video:null,canvas:null,lastFrame:null,lastMotion:Date.now(),visionTimer:null,ws:null,socketLive:false,visionEvent:null,voice:false,activeTab:'overview',simulation:null,routing:null,liveScenario:null,insights:null};
 const $=(s,r=document)=>r.querySelector(s); const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const api=async(url,opt={})=>{const r=await fetch(url,{headers:{'Content-Type':'application/json',...(opt.headers||{})},...opt});if(!r.ok)throw new Error((await r.text())||'Request failed');return r.json()};
+const API_BASE="https://nexus-care-omega.vercel.app";
+
+const api=async(url,opt={})=>{
+  const endpoint=url.startsWith('http')?url:`${API_BASE}${url}`;
+  const r=await fetch(endpoint,{
+    headers:{
+      'Content-Type':'application/json',
+      ...(opt.headers||{})
+    },
+    ...opt
+  });
+  if(!r.ok)throw new Error((await r.text())||'Request failed');
+  return r.json();
+};
 const badge=(t,c='')=>`<span class="badge ${c}">${esc(t)}</span>`;
 const pct=n=>`${Math.round(Number(n||0))}%`;
 window.addEventListener('error',e=>{console.error(e);const a=$('#app');if(a&&!state.user)a.innerHTML=`<div class="fatal"><div><b>NEXUS CARE</b><h2>Interface startup error</h2><p>${esc(e.message||'Unknown error')}</p></div></div>`});
@@ -37,7 +50,25 @@ async function doLogin(email,password){try{state.user=await api('/api/login',{me
 async function doRegister(){const ids=['regName','regDob','regAge','regGender','regBlood','regPhone','regHeight','regWeight','regAllergies','regConditions','regMeds','regSurgeries','regFamily','regEmergency','regAddress','regEmail','regPassword'];const v=Object.fromEntries(ids.map(id=>[id,$('#'+id)?.value?.trim()||'']));try{state.user=await api('/api/register',{method:'POST',body:JSON.stringify({name:v.regName,email:v.regEmail,password:v.regPassword,dob:v.regDob,age:+v.regAge,gender:v.regGender,blood_group:v.regBlood,phone:v.regPhone,emergency_contact:v.regEmergency,height_cm:+v.regHeight,weight_kg:+v.regWeight,allergies:v.regAllergies,conditions:v.regConditions,medications:v.regMeds,surgeries:v.regSurgeries,family_history:v.regFamily,address:v.regAddress})});await hydrate();render();setTimeout(()=>startCamera(true),900)}catch(e){const el=$('#registerError');if(el){el.textContent=e.message;el.classList.remove('hidden')}}}
 async function hydrate(){if(state.user.role==='patient'){state.profile=await api('/api/patient/'+state.user.patient_id);state.emergencies=await api('/api/emergencies');state.timeline=await api('/api/patient/'+state.user.patient_id+'/timeline')}else if(state.user.role==='clinician'){await loadHospital();connectSocket()}else{state.metrics=await api('/api/admin/metrics');state.hospitals=await api('/api/hospitals')}}
 async function loadHospital(){state.triages=await api('/api/triage/recent');state.emergencies=await api('/api/emergencies');state.hospitals=await api('/api/hospitals')}
-function connectSocket(){try{const p=location.protocol==='https:'?'wss':'ws';state.ws=new WebSocket(`${p}://${location.host}/ws`);state.ws.onopen=()=>{state.socketLive=true;render()};state.ws.onmessage=async e=>{try{const x=JSON.parse(e.data);if(['RED_ALERT','EMERGENCY'].includes(x.type)){await loadHospital();render()}}catch{}};state.ws.onclose=()=>state.socketLive=false}catch{}}
+function connectSocket(){
+  try{
+    const u=new URL(API_BASE);
+    const p=u.protocol==='https:'?'wss':'ws';
+    state.ws=new WebSocket(`${p}://${u.host}/ws`);
+    state.ws.onopen=()=>{state.socketLive=true;render()};
+    state.ws.onmessage=async e=>{
+      try{
+        const x=JSON.parse(e.data);
+        if(['RED_ALERT','EMERGENCY'].includes(x.type)){
+          await loadHospital();
+          render();
+        }
+      }catch{}
+    };
+    state.ws.onclose=()=>{state.socketLive=false};
+  }catch{}
+}
+
 async function doTriage(){const i=$('#symptomText');if(!i?.value.trim())return;const text=i.value.trim();state.messages.push({from:'user',t:text});i.value='';render();try{state.triage=await api('/api/triage',{method:'POST',body:JSON.stringify({patient_id:state.user.patient_id,text,age:state.profile?.age||54,gender:state.profile?.gender||'Male'})});state.messages.push({from:'ai',t:`I extracted ${(state.triage.entities?.symptoms||[]).join(', ').replaceAll('_',' ')||'the reported concern'}. The current educational triage estimate is ESI ${state.triage.esi} with ${Math.round(state.triage.risk)} risk. Human clinical review is required.`});state.timeline=await api('/api/patient/'+state.user.patient_id+'/timeline');render()}catch(e){state.messages.push({from:'ai',t:e.message});render()}}
 async function emergency(source='manual'){const send=(lat=null,lon=null)=>api('/api/emergency',{method:'POST',body:JSON.stringify({patient_id:state.user.patient_id||'p1',event:source==='vision'?'Guardian Vision detected possible prolonged inactivity':'Manual emergency button activated',lat,lon,source})}).then(async()=>{state.emergencies=await api('/api/emergencies');state.timeline=await api('/api/patient/'+state.user.patient_id+'/timeline');render()}).catch(e=>alert(e.message));if(navigator.geolocation)navigator.geolocation.getCurrentPosition(p=>send(p.coords.latitude,p.coords.longitude),()=>send(),{enableHighAccuracy:true,timeout:5000});else send()}
 async function startCamera(){if(state.camera){stopCamera();return}if(!navigator.mediaDevices?.getUserMedia){state.visionEvent='Camera API unavailable in this browser';render();return}try{state.stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:720}},audio:false});state.camera=true;state.lastMotion=Date.now();state.lastFrame=null;render();const v=$('#cameraVideo');state.video=v;if(v){v.srcObject=state.stream;await v.play().catch(()=>{})}state.canvas=document.createElement('canvas');state.canvas.width=80;state.canvas.height=45;state.visionTimer=setInterval(checkMotion,1000)}catch(e){state.camera=false;state.visionEvent='Browser camera access is required for Guardian Vision. No camera bypass is possible by design.';render()}}
