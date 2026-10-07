@@ -14,7 +14,7 @@ import os
 import joblib
 import numpy as np
 
-BASE = Path(__file__).resolve().parents[1]
+BASE = Path(__file__).resolve().parent
 MODEL_PATH = BASE / "data" / "triage_model.joblib"
 
 app = FastAPI(
